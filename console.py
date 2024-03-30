@@ -131,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         elif num_args > 1:
-            new_instance = cls_dict[class_type]()
+            new_instance = cls_dict[class_type](name=input_arr[1])
             for i in range(1, num_args):
                 try:
                     key, value = tuple(input_arr[i].split('='))

@@ -19,5 +19,5 @@ class City(BaseModel, Base):
         String(128),
         nullable=False,
     )
-    state = relationship('State', back_populates='cities')
+    state = relationship('State', back_populates='city')
     places = relationship("Place", backref='cities', cascade='all, delete')
