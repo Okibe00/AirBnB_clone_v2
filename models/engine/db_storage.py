@@ -82,13 +82,13 @@ class DBStorage:
         '''
         create all database tables
         '''
+        Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(
                 bind=self.__engine,
                 expire_on_commit=False
             )
-        self.__session = scoped_session(session_factory)
-        session = self.__session()
-        Base.metadata.create_all(self.__engine)
+        Session = scoped_session(session_factory)
+        self.__session = Session
 
     def close(self):
         '''
