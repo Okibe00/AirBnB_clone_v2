@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<HTML>
+	<HEAD></HEAD>
+	<BODY>
+		<H1>States</H1>
+		<UL>
+			{% for obj in state_lists %}
+			<LI>{{ obj.id }}: <B>{{ obj.name }}</B></LI>
+			{%endfor%}
+		</UL>
+	</BODY>
+</HTML>
