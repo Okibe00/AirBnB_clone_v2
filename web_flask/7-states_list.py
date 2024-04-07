@@ -31,9 +31,7 @@ app.url_map.strict_slashes = False
 @app.teardown_appcontext
 def end_session(exception=None):
     '''close database session'''
-    db = getattr(g, '_database', None)
-    if db is not None:
-        storage.close()
+    storage.close()
 
 
 @app.route('/states_list')
@@ -44,8 +42,8 @@ def list_states():
     state_obj = list()
     state_lists = storage.all(State)
     for state_dic in state_lists:
-        for v in state_dic:
-            state_obj.append(state_dic[v])
+        state_obj = state_obj + list(state_dic.values())
+
     state_obj = sorted(state_obj, key=lambda x: x.name)
     return render_template('7-states_list.html', state_lists=state_obj)
 
