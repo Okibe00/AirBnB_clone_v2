@@ -69,6 +69,7 @@ class DBStorage:
         save changes to the database
         '''
         self.__session().commit()
+        self.__session().close()
         self.__session.remove()
 
     def delete(self, obj=None):
@@ -94,4 +95,6 @@ class DBStorage:
         '''
         close current database session
         '''
+        self.save()
+        self.__session().close()
         self.__session.remove()
