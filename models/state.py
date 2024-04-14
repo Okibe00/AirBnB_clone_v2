@@ -9,13 +9,9 @@ import os
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
-
-    name = Column(
-        String(128),
-        nullable=False
-    )
-    city = relationship('City', back_populates='state')
     if os.getenv('HBNB_TYPE_STORAGE') == 'fs':
+        name = ''
+
         @property
         def cities(self):
             '''
@@ -30,3 +26,8 @@ class State(BaseModel, Base):
                     cities.append(v)
             else:
                 return cities
+    name = Column(
+        String(128),
+        nullable=False
+    )
+    cities = relationship('City', back_populates='state')
