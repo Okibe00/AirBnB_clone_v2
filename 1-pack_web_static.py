@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 '''Creates a gddzip archive'''
 from fabric.api import *
 from datetime import datetime
@@ -13,9 +13,10 @@ def do_pack():
     '''
     date = datetime.strftime(datetime.now(), '%Y%m%d%H%M%S')
     filename = f'web_static_{date}.tgz'
+    command = f'tar --sort=name -zcvf versions/{filename} web_static'
     if not os.path.exists('./versions'):
         os.mkdir('./versions')
-    if local(f'tar -zcvf versions/{filename} web_flask').succeeded:
+    if local(command).succeeded:
         print("compression completd")
         path = '{}/versions/{}'.format(os.getcwd(), filename)
         return (path)
